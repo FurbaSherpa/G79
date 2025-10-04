@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">G79</string>
     <string name="my_home">Home</string>
-    <string name="add_resturant">Add Resturant</string>
+    <string name="add_resturant">Add Restaurant</string>
     <string name="edit_resturant">Edit</string>
     <string name="directions">Directions</string>
-    <string name="back">Back</string>
-    <string name="bnt_back">Button</string>
+    <string name="btn_back">Back</string>
 </resources>

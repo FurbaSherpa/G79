@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Edit button pressed", Toast.LENGTH_SHORT).show();
 
 
-            Intent intent = new Intent(MainActivity.this, AddResturant.class);
+            Intent intent = new Intent(MainActivity.this, Edit.class);
             startActivity(intent);
 
         });
