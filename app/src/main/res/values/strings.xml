@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">G79</string>
-    <string name="my_home">Home</string>
-    <string name="add_resturant">Add Restaurant</string>
+    <string name="my_home">Restaurant Guide</string>
+    <string name="add_resturant">Add A Restaurant</string>
     <string name="edit_resturant">Edit</string>
     <string name="directions">Directions</string>
     <string name="btn_back">Back</string>
@@ -14,4 +14,20 @@
     <string name="hint_restaurant_rating">Restaurant Rating (1 - 10)</string>
     <string name="hint_restaurant_tags">Tags</string>
     <string name="btn_add">Add</string>
+
+
+    <string name="lbl_name">Restaurant Name: Pizza Pizza</string>
+    <string name="lbl_address">Address: 123 Test Drive</string>
+    <string name="lbl_number">Number: 111-222-3333</string>
+    <string name="lbl_rating">Rating: 7</string>
+    <string name="lbl_tags">Tags: Fast, Hot, Big</string>
+    <string name="lbl_description">Description: Good Customer Service</string>
+
+    <string name="lbl_name2">Restaurant Name: Wild Wings</string>
+    <string name="lbl_address2">Address: 456 Square One</string>
+    <string name="lbl_number2">Number: 777-212-3113</string>
+    <string name="lbl_rating2">Rating: 8</string>
+    <string name="lbl_tags2">Tags: Test, Hot, Friendly</string>
+    <string name="lbl_description2">Description: Friendly Staff</string>
+
 </resources>

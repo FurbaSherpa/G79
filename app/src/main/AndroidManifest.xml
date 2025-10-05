@@ -15,6 +15,9 @@
             android:name=".Edit"
             android:exported="false" />
         <activity
+            android:name=".AddResturantActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddResturant"
             android:parentActivityName=".MainActivity"
             android:exported="false" />
