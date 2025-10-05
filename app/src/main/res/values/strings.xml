@@ -5,4 +5,13 @@
     <string name="edit_resturant">Edit</string>
     <string name="directions">Directions</string>
     <string name="btn_back">Back</string>
+
+    <string name="title_add_restaurant">Add Restaurant</string>
+    <string name="hint_restaurant_name">Restaurant Name</string>
+    <string name="hint_restaurant_address">Restaurant Address</string>
+    <string name="hint_restaurant_description">Restaurant Description</string>
+    <string name="hint_restaurant_phone">Restaurant Phone Number</string>
+    <string name="hint_restaurant_rating">Restaurant Rating (1 - 10)</string>
+    <string name="hint_restaurant_tags">Tags</string>
+    <string name="btn_add">Add</string>
 </resources>
