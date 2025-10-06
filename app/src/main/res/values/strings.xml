@@ -5,7 +5,19 @@
     <string name="edit_resturant">Edit</string>
     <string name="directions">Directions</string>
     <string name="btn_back">Back</string>
-
+    <string name="edit_restaurant">Edit Restaurant</string>
+    <string name="save">Save</string>
+    <string name="name">Name</string>
+    <string name="bob_s_bar_amp_grill">
+<![CDATA[ Bob\'s Bar & Grill ]]>
+</string>
+    <string name="address">Address</string>
+    <string name="_789_restaurant_way">789 Restaurant Way</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="_555_123_4567">(555) 123–4567</string>
+    <string name="description">Description</string>
+    <string name="good_chicken_wings">Good chicken wings</string>
+    <string name="rating">Rating</string>
     <string name="title_add_restaurant">Add Restaurant</string>
     <string name="hint_restaurant_name">Restaurant Name</string>
     <string name="hint_restaurant_address">Restaurant Address</string>
@@ -14,20 +26,16 @@
     <string name="hint_restaurant_rating">Restaurant Rating (1 - 10)</string>
     <string name="hint_restaurant_tags">Tags</string>
     <string name="btn_add">Add</string>
-
-
     <string name="lbl_name">Restaurant Name: Pizza Pizza</string>
     <string name="lbl_address">Address: 123 Test Drive</string>
     <string name="lbl_number">Number: 111-222-3333</string>
     <string name="lbl_rating">Rating: 7</string>
     <string name="lbl_tags">Tags: Fast, Hot, Big</string>
     <string name="lbl_description">Description: Good Customer Service</string>
-
     <string name="lbl_name2">Restaurant Name: Wild Wings</string>
     <string name="lbl_address2">Address: 456 Square One</string>
     <string name="lbl_number2">Number: 777-212-3113</string>
     <string name="lbl_rating2">Rating: 8</string>
     <string name="lbl_tags2">Tags: Test, Hot, Friendly</string>
     <string name="lbl_description2">Description: Friendly Staff</string>
-
 </resources>
