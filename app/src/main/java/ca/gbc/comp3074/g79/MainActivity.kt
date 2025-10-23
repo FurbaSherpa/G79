@@ -1,60 +1,58 @@
-package ca.gbc.comp3074.g79;
+package ca.gbc.comp3074.g79
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.Toast;
+import android.annotation.SuppressLint
+import android.os.Build
+import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import ca.gbc.comp3074.g79.data.RestaurantRepository
+import ca.gbc.comp3074.g79.mapping.RestaurantAdapter
+import ca.gbc.comp3074.g79.ui.RestaurantViewModel
+import ca.gbc.comp3074.g79.ui.RestaurantViewModelFactory
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+class MainActivity : AppCompatActivity() {
+    private var viewModel: RestaurantViewModel? = null
+    private var adapter: RestaurantAdapter? = null
 
-public class MainActivity extends AppCompatActivity {
+    @SuppressLint("RestrictedApi")
+    @RequiresApi(Build.VERSION_CODES.O)
+    override fun onCreate(savedInstanceState: android.os.Bundle?) {
+        super.onCreate(savedInstanceState)
+        this.enableEdgeToEdge()
+        setContentView(R.layout.activity_main)
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        // Initialize ViewModel
+        val app = getApplication() as G79App
+        val repo: RestaurantRepository = RestaurantRepository(app.db.restaurantDao())
+        viewModel = ViewModelProvider(this, RestaurantViewModelFactory(repo))
+            .get<RestaurantViewModel>(RestaurantViewModel::class.java) as RestaurantViewModel?
 
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button button = findViewById(R.id.btn_add);
-        button.setOnClickListener(v->{
-            Log.d("BTN", "It works");
-            Toast.makeText(MainActivity.this, "Add button pressed", Toast.LENGTH_SHORT).show();
+        // Setup RecyclerView
+        val recycler: RecyclerView = findViewById<RecyclerView>(R.id.recyclerRestaurants)
+        adapter = RestaurantAdapter()
+        recycler.setAdapter(adapter)
+        recycler.setLayoutManager(LinearLayoutManager(this))
 
-
-            Intent intent = new Intent(MainActivity.this, AddResturantActivity.class);
-            startActivity(intent);
-
-        });
-
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button btn_edit = findViewById(R.id.btn_edit);
-        btn_edit.setOnClickListener(v->{
-            Log.d("BTN", "It works");
-            Toast.makeText(MainActivity.this, "Edit button pressed", Toast.LENGTH_SHORT).show();
+        // Observe restaurants Flow
+        lifecycleScope.launch {
+            viewModel?.restaurants?.collectLatest { list ->
+                adapter?.submitList(list)
+            }
+        }
 
 
-            Intent intent = new Intent(MainActivity.this, Edit.class);
-            startActivity(intent);
-
-        });
-
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button btn_directions = findViewById(R.id.btn_directions);
-        btn_directions.setOnClickListener(v->{
-           Intent intent = new Intent(Intent.ACTION_VIEW,
-                   Uri.parse("geo: 43.6410475,-79.7372308"));
-           startActivity(intent);
-        });
-
+        // FloatingActionButton to add a restaurant
+        val fabAdd: FloatingActionButton = findViewById<FloatingActionButton>(R.id.fabAdd)
+        fabAdd.setOnClickListener(android.view.View.OnClickListener { v: android.view.View? ->
+            val intent = android.content.Intent(this@MainActivity, AddResturantActivity::class.java)
+            startActivity(intent)
+        })
     }
 }
