@@ -8,4 +8,6 @@ class RestaurantRepository(private val dao: RestaurantDao) {
 
     suspend fun add(r: Restaurant) = dao.insert(r)
     suspend fun edit(r: Restaurant) = dao.update(r)
+
+    suspend fun delete(r: Restaurant) = dao.delete(r)
 }
