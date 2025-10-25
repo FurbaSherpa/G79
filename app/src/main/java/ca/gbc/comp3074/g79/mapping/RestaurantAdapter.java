@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -58,6 +59,9 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
         private final TextView tags;
         private final Button btnEdit;
         private final Button btnDirections;
+        private final ImageButton btnShare;
+        private final ImageButton btnFacebook;
+        private final ImageButton btnTwitter;
 
         RestaurantViewHolder(View itemView) {
             super(itemView);
@@ -69,7 +73,13 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
             tags = itemView.findViewById(R.id.textTags);
             btnEdit = itemView.findViewById(R.id.btnEdit);
             btnDirections = itemView.findViewById(R.id.btnDirections);
+            btnShare = (ImageButton) itemView.findViewById(R.id.btnShare);
+            btnFacebook = (ImageButton) itemView.findViewById(R.id.btnFacebook);
+            btnTwitter = (ImageButton) itemView.findViewById(R.id.btnTwitter);
         }
+
+
+
 
         void bind(Restaurant restaurant) {
             name.setText(restaurant.getName());
@@ -92,6 +102,45 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
                 intent.putExtra("restaurantId", restaurant.getId());
                 v.getContext().startActivity(intent);
             });
+            // Share button logic
+            btnShare.setOnClickListener(v -> {
+                String shareText = "Check out this restaurant:\n" +
+                        "Name: " + restaurant.getName() + "\n" +
+                        "Address: " + restaurant.getAddress() + "\n" +
+                        "Phone: " + restaurant.getPhone() + "\n" +
+                        "Tags: " + restaurant.getTags();
+
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, shareText);
+
+
+                Intent chooser = Intent.createChooser(intent, "Share via");
+                v.getContext().startActivity(chooser);
+            });
+
+            btnFacebook.setOnClickListener(v -> {
+                String shareText = "Check out this restaurant:\n" +
+                        restaurant.getName() + " - " + restaurant.getAddress();
+
+                String fallbackUrl = "https://example.com"; // Replace with your app's site if available
+                String url = "https://www.facebook.com/sharer/sharer.php?u=" + Uri.encode(fallbackUrl);
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                v.getContext().startActivity(intent);
+            });
+
+            btnTwitter.setOnClickListener(v -> {
+                String tweetText = "Check out this restaurant:\n" +
+                        restaurant.getName() + " - " + restaurant.getAddress();
+
+                String tweetUrl = "https://twitter.com/intent/tweet?text=" + Uri.encode(tweetText);
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(tweetUrl));
+                v.getContext().startActivity(intent);
+            });
+
+
         }
     }
 }
