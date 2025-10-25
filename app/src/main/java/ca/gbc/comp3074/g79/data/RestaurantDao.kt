@@ -1,6 +1,7 @@
 package ca.gbc.comp3074.g79.data
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -14,6 +15,9 @@ interface RestaurantDao {
 
     @Update
     suspend fun update(restaurant: Restaurant)
+
+    @Delete
+    suspend fun delete(restaurant: Restaurant)
 
     @Query("SELECT * FROM restaurants ORDER BY name ASC")
     fun getAll(): Flow<List<Restaurant>>

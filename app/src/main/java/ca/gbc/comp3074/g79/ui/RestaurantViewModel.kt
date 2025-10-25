@@ -19,6 +19,10 @@ class RestaurantViewModel(private val repo: RestaurantRepository) : ViewModel() 
     fun editRestaurant(r: Restaurant) {
         viewModelScope.launch { repo.edit(r) }
     }
+
+    fun deleteRestaurant(r: Restaurant) {
+        viewModelScope.launch { repo.delete(r) }
+    }
 }
 
 class RestaurantViewModelFactory(private val repo: RestaurantRepository) : ViewModelProvider.Factory {

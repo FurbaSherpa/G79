@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
@@ -17,11 +18,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import ca.gbc.comp3074.g79.Edit;
 import ca.gbc.comp3074.g79.R;
 import ca.gbc.comp3074.g79.data.Restaurant;
+import ca.gbc.comp3074.g79.data.RestaurantDao;
+import ca.gbc.comp3074.g79.data.RestaurantDatabase;
+import ca.gbc.comp3074.g79.data.RestaurantDatabase_Impl;
+import ca.gbc.comp3074.g79.data.RestaurantRepository;
+import ca.gbc.comp3074.g79.ui.RestaurantViewModel;
 
 public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter.RestaurantViewHolder> {
 
-    public RestaurantAdapter() {
+    // Interface for Delete button callback
+    public interface OnDeleteClickListener {
+        void onDelete(Restaurant restaurant);
+    }
+
+    private final OnDeleteClickListener deleteListener;
+    public RestaurantAdapter(OnDeleteClickListener listener) {
         super(DIFF_CALLBACK);
+        this.deleteListener = listener;
     }
 
     private static final DiffUtil.ItemCallback<Restaurant> DIFF_CALLBACK =
@@ -50,7 +63,7 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
         holder.bind(getItem(position));
     }
 
-    static class RestaurantViewHolder extends RecyclerView.ViewHolder {
+    class RestaurantViewHolder extends RecyclerView.ViewHolder {
         private final TextView name;
         private final TextView address;
         private final TextView description;
@@ -62,6 +75,8 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
         private final ImageButton btnShare;
         private final ImageButton btnFacebook;
         private final ImageButton btnTwitter;
+        private final Button btnDelete;
+
 
         RestaurantViewHolder(View itemView) {
             super(itemView);
@@ -76,6 +91,7 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
             btnShare = (ImageButton) itemView.findViewById(R.id.btnShare);
             btnFacebook = (ImageButton) itemView.findViewById(R.id.btnFacebook);
             btnTwitter = (ImageButton) itemView.findViewById(R.id.btnTwitter);
+            btnDelete = itemView.findViewById(R.id.btnDelete);
         }
 
 
@@ -140,6 +156,14 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
                 v.getContext().startActivity(intent);
             });
 
+
+
+            btnDelete.setOnClickListener(v -> {
+                if (deleteListener != null) {
+                    deleteListener.onDelete(restaurant);
+                    Toast.makeText(v.getContext(), "Restaurant Deleted", Toast.LENGTH_SHORT).show();
+                }
+            });
 
         }
     }
