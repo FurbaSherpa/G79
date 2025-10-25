@@ -38,4 +38,5 @@
     <string name="lbl_rating2">Rating: 8</string>
     <string name="lbl_tags2">Tags: Test, Hot, Friendly</string>
     <string name="lbl_description2">Description: Friendly Staff</string>
+    <string name="txt_group_title">Group 79 Members</string>
 </resources>

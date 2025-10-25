@@ -1,8 +1,12 @@
 package ca.gbc.comp3074.g79
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
+import android.util.Log.v
+import android.widget.ImageButton
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -26,12 +30,20 @@ class MainActivity : AppCompatActivity() {
     private var adapter: RestaurantAdapter? = null
     private var fullList: List<Restaurant> = emptyList()
 
+
     @SuppressLint("RestrictedApi")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: android.os.Bundle?) {
         super.onCreate(savedInstanceState)
         this.enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        val btn_info: ImageButton = findViewById(R.id.btn_info)
+        btn_info.setOnClickListener {
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(this, "About", Toast.LENGTH_SHORT).show()
+        }
 
 
         // Initialize ViewModel
