@@ -15,41 +15,26 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-<<<<<<< HEAD
-import ca.gbc.comp3074.g79.Edit;
-=======
->>>>>>> 69501158b79dd13502fc33c5a480fe9b6b75a37b
 import ca.gbc.comp3074.g79.R;
 import ca.gbc.comp3074.g79.data.Restaurant;
 
 public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter.RestaurantViewHolder> {
 
-<<<<<<< HEAD
-=======
     public interface OnEditClickListener {
         void onEdit(Restaurant restaurant);
     }
 
     // Interface for Delete button callback
->>>>>>> 69501158b79dd13502fc33c5a480fe9b6b75a37b
     public interface OnDeleteClickListener {
         void onDelete(Restaurant restaurant);
     }
 
-<<<<<<< HEAD
-    private final OnDeleteClickListener deleteListener;
-
-    public RestaurantAdapter(OnDeleteClickListener listener) {
-        super(DIFF_CALLBACK);
-        this.deleteListener = listener;
-=======
     private final OnEditClickListener editListener;
     private final OnDeleteClickListener deleteListener;
     public RestaurantAdapter(OnDeleteClickListener listener, OnEditClickListener editListener) {
         super(DIFF_CALLBACK);
         this.deleteListener = listener;
         this.editListener = editListener;
->>>>>>> 69501158b79dd13502fc33c5a480fe9b6b75a37b
     }
 
     private static final DiffUtil.ItemCallback<Restaurant> DIFF_CALLBACK =
@@ -79,11 +64,6 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
     }
 
     class RestaurantViewHolder extends RecyclerView.ViewHolder {
-<<<<<<< HEAD
-        private final TextView name, address, description, phone, tags;
-        private final Button btnEdit, btnDirections, btnDelete;
-        private final ImageButton btnShare, btnFacebook, btnTwitter;
-=======
         private final TextView name;
         private final TextView address;
         private final TextView description;
@@ -97,25 +77,12 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
         private final ImageButton btnTwitter;
         private final Button btnDelete;
 
->>>>>>> 69501158b79dd13502fc33c5a480fe9b6b75a37b
-
         RestaurantViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.textName);
             address = itemView.findViewById(R.id.textAddress);
             description = itemView.findViewById(R.id.textDescription);
             phone = itemView.findViewById(R.id.textPhone);
-<<<<<<< HEAD
-            tags = itemView.findViewById(R.id.textTags);
-            btnEdit = itemView.findViewById(R.id.btnEdit);
-            btnDirections = itemView.findViewById(R.id.btnDirections);
-            btnShare = itemView.findViewById(R.id.btnShare);
-            btnFacebook = itemView.findViewById(R.id.btnFacebook);
-            btnTwitter = itemView.findViewById(R.id.btnTwitter);
-            btnDelete = itemView.findViewById(R.id.btnDelete);
-        }
-
-=======
             rating = itemView.findViewById(R.id.textRating);
             tags = itemView.findViewById(R.id.textTags);
             btnEdit = itemView.findViewById(R.id.btnEdit);
@@ -126,46 +93,21 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
             btnDelete = itemView.findViewById(R.id.btnDelete);
         }
 
-
-
-
->>>>>>> 69501158b79dd13502fc33c5a480fe9b6b75a37b
         void bind(Restaurant restaurant) {
             name.setText(restaurant.getName());
             address.setText(restaurant.getAddress());
             description.setText(restaurant.getDescription());
             phone.setText(restaurant.getPhone());
-<<<<<<< HEAD
-            tags.setText("Tags: " + restaurant.getTags());
-
-=======
             //rating.setText("Rating: " + restaurant.getRating());
             tags.setText("Tags: " + restaurant.getTags());
 
             // Example: Directions button opens Google Maps
->>>>>>> 69501158b79dd13502fc33c5a480fe9b6b75a37b
             btnDirections.setOnClickListener(v -> {
                 String geoUri = "geo:0,0?q=" + Uri.encode(restaurant.getAddress());
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
                 v.getContext().startActivity(intent);
             });
 
-<<<<<<< HEAD
-            btnEdit.setOnClickListener(v -> {
-                Intent intent = new Intent(v.getContext(), Edit.class);
-                intent.putExtra("restaurantId", restaurant.getId());
-                v.getContext().startActivity(intent);
-            });
-
-            btnShare.setOnClickListener(v -> {
-                String shareText = "Check out: " + restaurant.getName() + " - " + restaurant.getAddress();
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, shareText);
-                v.getContext().startActivity(Intent.createChooser(intent, "Share via"));
-            });
-
-=======
             // Example: Edit button launches EditActivity with restaurant ID
             btnEdit.setOnClickListener(v -> {
                 if (editListener != null) {
@@ -183,7 +125,6 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_TEXT, shareText);
-
 
                 Intent chooser = Intent.createChooser(intent, "Share via");
                 v.getContext().startActivity(chooser);
@@ -210,19 +151,12 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
                 v.getContext().startActivity(intent);
             });
 
-
-
->>>>>>> 69501158b79dd13502fc33c5a480fe9b6b75a37b
             btnDelete.setOnClickListener(v -> {
                 if (deleteListener != null) {
                     deleteListener.onDelete(restaurant);
                     Toast.makeText(v.getContext(), "Restaurant Deleted", Toast.LENGTH_SHORT).show();
                 }
             });
-<<<<<<< HEAD
-=======
-
->>>>>>> 69501158b79dd13502fc33c5a480fe9b6b75a37b
         }
     }
 }
