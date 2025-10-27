@@ -54,7 +54,7 @@ public class AddResturantActivity extends AppCompatActivity {
             if (nameText.isEmpty() || addressText.isEmpty()) {
                 Toast.makeText(this, "Please fill in required fields", Toast.LENGTH_SHORT).show();
             } else {
-                // Create Restaurant object (ignoring rating for now, since DB schema doesn’t include it yet)
+                // Create Restaurant object
                 Restaurant restaurant = new Restaurant(
                         0, // id auto-generated
                         nameText,
