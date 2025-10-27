@@ -3,15 +3,12 @@ package ca.gbc.comp3074.g79
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
-import android.util.Log.v
 import android.widget.ImageButton
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,15 +49,21 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, RestaurantViewModelFactory(repo))
             .get<RestaurantViewModel>(RestaurantViewModel::class.java) as RestaurantViewModel?
 
-        // Initialize adapter with delete callback
-        adapter = RestaurantAdapter { restaurant ->
+        // Initialize adapter with delete and edit callback
+        adapter = RestaurantAdapter(
+            { restaurant ->
             viewModel?.deleteRestaurant(restaurant)
-        }
+            },
+            { restaurant ->
+                val intent = Intent(this@MainActivity, Edit::class.java)
+                intent.putExtra("restaurantId", restaurant.id)
+                startActivity(intent)
+            }
+        )
+
 
         // Setup RecyclerView
         val recycler: RecyclerView = findViewById<RecyclerView>(R.id.recyclerRestaurants)
-        adapter = RestaurantAdapter{restaurant ->
-            viewModel?.deleteRestaurant(restaurant)}
         recycler.setAdapter(adapter)
         recycler.setLayoutManager(LinearLayoutManager(this))
 

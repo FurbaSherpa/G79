@@ -15,26 +15,26 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import ca.gbc.comp3074.g79.Edit;
 import ca.gbc.comp3074.g79.R;
 import ca.gbc.comp3074.g79.data.Restaurant;
-import ca.gbc.comp3074.g79.data.RestaurantDao;
-import ca.gbc.comp3074.g79.data.RestaurantDatabase;
-import ca.gbc.comp3074.g79.data.RestaurantDatabase_Impl;
-import ca.gbc.comp3074.g79.data.RestaurantRepository;
-import ca.gbc.comp3074.g79.ui.RestaurantViewModel;
 
 public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter.RestaurantViewHolder> {
+
+    public interface OnEditClickListener {
+        void onEdit(Restaurant restaurant);
+    }
 
     // Interface for Delete button callback
     public interface OnDeleteClickListener {
         void onDelete(Restaurant restaurant);
     }
 
+    private final OnEditClickListener editListener;
     private final OnDeleteClickListener deleteListener;
-    public RestaurantAdapter(OnDeleteClickListener listener) {
+    public RestaurantAdapter(OnDeleteClickListener listener, OnEditClickListener editListener) {
         super(DIFF_CALLBACK);
         this.deleteListener = listener;
+        this.editListener = editListener;
     }
 
     private static final DiffUtil.ItemCallback<Restaurant> DIFF_CALLBACK =
@@ -114,9 +114,9 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
 
             // Example: Edit button launches EditActivity with restaurant ID
             btnEdit.setOnClickListener(v -> {
-                Intent intent = new Intent(v.getContext(), Edit.class);
-                intent.putExtra("restaurantId", restaurant.getId());
-                v.getContext().startActivity(intent);
+                if (editListener != null) {
+                    editListener.onEdit(restaurant);
+                }
             });
             // Share button logic
             btnShare.setOnClickListener(v -> {

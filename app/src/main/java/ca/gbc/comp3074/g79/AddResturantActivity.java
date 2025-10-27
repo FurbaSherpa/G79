@@ -61,6 +61,7 @@ public class AddResturantActivity extends AppCompatActivity {
                         addressText,
                         phoneText,
                         descriptionText,
+                        ratingText,
                         tagsText
                 );
 

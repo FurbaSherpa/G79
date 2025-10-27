@@ -10,5 +10,6 @@ data class Restaurant(
     val address: String,
     val phone: String,
     val description: String,
+    val rating: String,
     val tags: String
 )
