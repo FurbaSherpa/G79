@@ -16,6 +16,13 @@ class RestaurantViewModel(private val repo: RestaurantRepository) : ViewModel() 
         viewModelScope.launch { repo.add(r) }
     }
 
+<<<<<<< HEAD
+=======
+    fun getRestaurantById(id: Int): Flow<Restaurant?> {
+        return repo.getById(id)
+    }
+
+>>>>>>> 69501158b79dd13502fc33c5a480fe9b6b75a37b
     fun editRestaurant(r: Restaurant) {
         viewModelScope.launch { repo.edit(r) }
     }
