@@ -77,7 +77,6 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
         private final ImageButton btnTwitter;
         private final Button btnDelete;
 
-
         RestaurantViewHolder(View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.textName);
@@ -93,9 +92,6 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
             btnTwitter = (ImageButton) itemView.findViewById(R.id.btnTwitter);
             btnDelete = itemView.findViewById(R.id.btnDelete);
         }
-
-
-
 
         void bind(Restaurant restaurant) {
             name.setText(restaurant.getName());
@@ -130,7 +126,6 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
                 intent.setType("text/plain");
                 intent.putExtra(Intent.EXTRA_TEXT, shareText);
 
-
                 Intent chooser = Intent.createChooser(intent, "Share via");
                 v.getContext().startActivity(chooser);
             });
@@ -156,15 +151,12 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
                 v.getContext().startActivity(intent);
             });
 
-
-
             btnDelete.setOnClickListener(v -> {
                 if (deleteListener != null) {
                     deleteListener.onDelete(restaurant);
                     Toast.makeText(v.getContext(), "Restaurant Deleted", Toast.LENGTH_SHORT).show();
                 }
             });
-
         }
     }
 }
