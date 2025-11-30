@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ca.gbc.comp3074.g79.data.Restaurant
@@ -66,6 +67,10 @@ class MainActivity : AppCompatActivity() {
         val recycler: RecyclerView = findViewById<RecyclerView>(R.id.recyclerRestaurants)
         recycler.setAdapter(adapter)
         recycler.setLayoutManager(LinearLayoutManager(this))
+
+        // Add divider between items
+        val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        recycler.addItemDecoration(divider)
 
         // Observe restaurants Flow
         lifecycleScope.launch {
