@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -38,7 +39,7 @@ public class AddResturantActivity extends AppCompatActivity {
         EditText address = findViewById(R.id.etRestaurantAddress);
         EditText description = findViewById(R.id.etRestaurantDescription);
         EditText phone = findViewById(R.id.etRestaurantPhone);
-        EditText rating = findViewById(R.id.etRestaurantRating);
+        RatingBar rating = findViewById(R.id.ratingBar);
         EditText tags = findViewById(R.id.etRestaurantTags);
 
         Button addButton = findViewById(R.id.btnAddRestaurant);
@@ -47,14 +48,14 @@ public class AddResturantActivity extends AppCompatActivity {
             String addressText = address.getText().toString().trim();
             String descriptionText = description.getText().toString().trim();
             String phoneText = phone.getText().toString().trim();
-            String ratingText = rating.getText().toString().trim();
+            String ratingText = String.valueOf(rating.getRating());
             String tagsText = tags.getText().toString().trim();
 
             // validation
             if (nameText.isEmpty() || addressText.isEmpty()) {
                 Toast.makeText(this, "Please fill in required fields", Toast.LENGTH_SHORT).show();
             } else {
-                // Create Restaurant object (ignoring rating for now, since DB schema doesn’t include it yet)
+                // Create Restaurant object with rating
                 Restaurant restaurant = new Restaurant(
                         0, // id auto-generated
                         nameText,

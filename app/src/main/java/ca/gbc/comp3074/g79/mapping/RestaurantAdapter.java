@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,7 +69,7 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
         private final TextView address;
         private final TextView description;
         private final TextView phone;
-        private final TextView rating;
+        private final RatingBar ratingBar;
         private final TextView tags;
         private final Button btnEdit;
         private final Button btnDirections;
@@ -84,7 +85,7 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
             address = itemView.findViewById(R.id.textAddress);
             description = itemView.findViewById(R.id.textDescription);
             phone = itemView.findViewById(R.id.textPhone);
-            rating = itemView.findViewById(R.id.textRating);
+            ratingBar = itemView.findViewById(R.id.ratingBar);
             tags = itemView.findViewById(R.id.textTags);
             btnEdit = itemView.findViewById(R.id.btnEdit);
             btnDirections = itemView.findViewById(R.id.btnDirections);
@@ -102,7 +103,16 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
             address.setText(restaurant.getAddress());
             description.setText(restaurant.getDescription());
             phone.setText(restaurant.getPhone());
-            //rating.setText("Rating: " + restaurant.getRating());
+
+            // Set rating as stars
+            float ratingValue = 0f;
+            try {
+                ratingValue = Float.parseFloat(restaurant.getRating());
+            } catch (NumberFormatException e) {
+                ratingValue = 0f;
+            }
+            ratingBar.setRating(ratingValue);
+
             tags.setText("Tags: " + restaurant.getTags());
 
             // Example: Directions button opens Google Maps
@@ -124,6 +134,7 @@ public class RestaurantAdapter extends ListAdapter<Restaurant, RestaurantAdapter
                         "Name: " + restaurant.getName() + "\n" +
                         "Address: " + restaurant.getAddress() + "\n" +
                         "Phone: " + restaurant.getPhone() + "\n" +
+                        "Rating: " + restaurant.getRating() + " stars\n" +
                         "Tags: " + restaurant.getTags();
 
                 Intent intent = new Intent(Intent.ACTION_SEND);

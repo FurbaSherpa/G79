@@ -23,7 +23,7 @@
     <string name="hint_restaurant_address">Restaurant Address</string>
     <string name="hint_restaurant_description">Restaurant Description</string>
     <string name="hint_restaurant_phone">Restaurant Phone Number</string>
-    <string name="hint_restaurant_rating">Restaurant Rating (1 - 10)</string>
+    <string name="hint_restaurant_rating">Restaurant Rating (1 - 5)</string>
     <string name="hint_restaurant_tags">Tags</string>
     <string name="btn_add">Add</string>
     <string name="lbl_name">Restaurant Name: Pizza Pizza</string>
